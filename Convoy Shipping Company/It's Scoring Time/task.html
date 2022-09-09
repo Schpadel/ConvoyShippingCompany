@@ -1,0 +1,116 @@
+<h5 id="description">Description</h5>
+
+<p>The requirements for scoring function have been defined. And it looks like you have the final version of the Excel file. It's time to prepare the scoring function and export the selected entries to JSON and XML files.</p>
+
+<p>The idea of scoring function is to define under what conditions the scoring points are to be given. The next step is to determine how many points are enough to qualify or reject the testing object.</p>
+
+<p>In our case, the management clarified some key issues:<br>
+1) Number of pitstops. If there are two or more gas stops on the way, the object has 0 points. One stop at the filling station means 1 point. No stops — 2 scoring points.<br>
+2) Fuel consumed over the entire trip. If a truck burned  230 liters or less, 2 points are given. If more — 1 point.<br>
+3) Truck capacity. If the capacity is 20 tones or more, it gets 2 points. If less — 0 points.</p>
+
+<p>It was found that the average route length is 450 km. Do not include the return path: 450 kilometers is the whole route. Remember that the <code class="java">engine_capacity</code> is in liters, the <code class="java">fuel_consumption</code> is in liters/100 kilometers, and the <code class="java">maximum_load</code> is in tonnes.</p>
+
+<p>Interesting fact: scoring function are often used by banks to pre-estimate the so-called credit score.</p>
+
+<h5 id="objectives">Objectives</h5>
+
+<ol>
+	<li>Prompt the user to give a name for the input file (complete with the .x<em>lsx,</em> <em>.csv, </em><em>[CHECKED].csv or .s3db </em>extension). For the prompt message, use <code class="java">Input file name</code> followed by a newline.</li>
+	<li>If your file is <em>.xlsx </em>or <em>.csv, </em>or it ends with %...%<em>[CHECKED].csv</em>, perform all the previous transformations in the correct order.</li>
+	<li>Add the <code class="java">score</code> column to <em>.s3db </em>files. Populate the column with the scoring points, according to the algorithm described above. The <code class="java">score</code> column should be added during the conversion from %...%<em>[CHECKED].csv </em>to <em>.s3db</em>.</li>
+	<li>Generate JSON and XML files according to the scoring points. All entries with a score of greater than 3 should be exported to the JSON file, others to the XML file.</li>
+	<li>The <code class="java">score</code> column should not be exported to JSON and XML files.</li>
+	<li>Count the number of entries imported to JSON and XML files.</li>
+	<li>Your program should output the following message: <code class="java">X vehicles were saved</code> or <code class="java">1 vehicle was saved</code>, where <code class="java">X</code> is the number of inserted entries. The program should include the output file name. For example:
+	<pre><code class="java">9 vehicles were saved into %file_name%.json
+0 vehicles were saved into %file_name%.xml</code></pre>
+	</li>
+	<li>
+	<p>Display all the previous outputs for the conversions you have made.</p>
+	</li>
+</ol>
+
+<p>For example, take a look at the following entries:</p>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 530px;">
+	<tbody>
+		<tr>
+			<td>vehicle_id</td>
+			<td>engine_capacity</td>
+			<td>fuel_consumption</td>
+			<td>maximum_load</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>200</td>
+			<td>50</td>
+			<td>6</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>In the SQLite database, they should look like this:</p>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 654px;">
+	<tbody>
+		<tr>
+			<td>vehicle_id</td>
+			<td>engine_capacity</td>
+			<td>fuel_consumption</td>
+			<td>maximum_load</td>
+			<td>score</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>200</td>
+			<td>50</td>
+			<td>6</td>
+			<td>3</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Route length is 450 km.<strong> </strong>One stop at the filling station (1 point), the fuel consumption is below 230 liters (2 points), and the maximum capacity is below 20 tonnes (0 points). This entry should go to the XML file.</p>
+
+<p>If you have corrupted test files, please <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://stepik.org/media/attachments/lesson/461165/stage6_files.zip" rel="noopener noreferrer nofollow">download them</a> and unzip in your working directory.</p>
+
+<h5 id="examples">Examples</h5>
+
+<p>You can use the files from the previous stages.</p>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_final_xlsx.xlsx
+19 lines were added to data_final_xlsx.csv
+3 cells were corrected in data_final_xlsx[CHECKED].csv
+19 records were inserted into data_final_xlsx.s3db
+12 vehicles were saved into data_final_xlsx.json
+7 vehicles were saved into data_final_xlsx.xml</code></pre>
+
+<p><strong>Example 2</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_csv.csv
+12 cells were corrected in data_big_csv[CHECKED].csv
+10 records were inserted into data_big_csv.s3db
+7 vehicles were saved into data_big_csv.json
+3 vehicles were saved into data_big_csv.xml</code></pre>
+
+<p><strong>Example 3</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_chk[CHECKED].csv
+10 records were inserted into data_big_chk.s3db
+7 vehicles were saved into data_big_chk.json
+3 vehicles were saved into data_big_chk.xml</code></pre>
+
+<p><strong>Example 4</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_sql.s3db
+10 vehicles were saved into data_big_sql.json
+0 vehicles were saved into data_big_sql.xml</code></pre>

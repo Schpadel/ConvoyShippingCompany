@@ -1,0 +1,80 @@
+<h5 id="theory">Theory</h5>
+
+<p>SQLite3 is a relational database management system. You can use it for free; it is licensed as Public Domain. The system implements most SQL standards. For this project, we will use the basic SQLite3 functions.</p>
+
+<p>First, import the <code class="java">sqlite3</code> library:</p>
+
+<pre><code class="java">import sqlite3</code></pre>
+
+<p>To connect your database to an SQLite database, use the <code class="java">connect()</code> method from the <code class="java">sqlite3</code> library and create a database cursor with the <code class="java">cursor()</code> method:</p>
+
+<pre><code class="java">conn = sqlite3.connect('%data_base_name%.s3db')
+cursor_name = conn.cursor()</code></pre>
+
+<p>To execute an SQL query, use the <code class="java">execute()</code> cursor method. This method will return an object that contains the result of the query. For example:</p>
+
+<pre><code class="java">result = cursor_name.execute(SQL_query_as_string)</code></pre>
+
+<p>To retrieve entries from the returned object, you can use two methods: <code class="java">fetchall()</code> and <code class="java">fetchone()</code>. The first returns all the matching entries as a list of tuples, while the second returns the next row of a query result or <code class="java">None</code> if there are no more rows:</p>
+
+<pre><code class="java">all_rows = result.fetchall()
+next_row = result.fetchone()</code></pre>
+
+<p>Another two important methods are <code class="java">close()</code> and <code class="java">commit()</code>. Remember that you need to confirm some SQL queries with the <code class="java">commit</code> command. Otherwise, the data will be lost. At the end of your code, disconnect your database. Both methods are related to the database connection:</p>
+
+<pre><code class="java">conn.commit()
+conn.closecommit()</code></pre>
+
+<p>If you need more information, the <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://www.sqlitetutorial.net/" rel="noopener noreferrer nofollow">SQLite Tutorial</a> will help you!</p>
+
+<h5 id="description">Description</h5>
+
+<p>You are ready to create an SQLite3 database. Your bosses have some ideas on how to use the database for scoring in the future, so be ready for that! Unfortunately, it's an offer you can't refuse... The final Excel version is not ready yet. Write an algorithm that converts a corrected CSV file into an SQLite3 database.</p>
+
+<h5 id="objectives">Objectives</h5>
+
+<ol>
+	<li>Prompt the user to give a name for the input file (complete with the .x<em>lsx,</em> <em>.csv, </em>or <em>[CHECKED].csv </em>extension). For the prompt message, use <code class="java">Input file name</code> followed by a newline.</li>
+	<li>If your file is <em>.xlsx </em>or .csv, perform all the previous transformations in the correct order, until you get a file that ends with %...%<em>[CHECKED].csv</em>.</li>
+	<li>If the file ends with %...%<em>[CHECKED].csv</em>, create an SQLite3 database with the CSV file name, change its extension to <em>.s3db</em>. Remove the <code class="java">[CHECKED]</code> suffix. For example, %<em>file_name%[CHECKED].csv</em> should be changed to %<em>file_name%.s3db</em>. </li>
+	<li>Use "<em>convoy</em>" as the name for your database table.</li>
+	<li>Use headers from the CSV file as the names of the table columns.</li>
+	<li>The <code class="java">vehicle_id</code> column should have the <code class="java">INTEGER</code> type; make sure it's <code class="java">PRIMARY KEY</code>.</li>
+	<li>Other columns should have the <code class="java">INTEGER</code> type with <code class="java">NOT NULL</code> attributes.</li>
+	<li>Insert the entries from your <em>%...%[CHECKED].csv</em> file.</li>
+	<li>Count the number of entries inserted into the database.</li>
+	<li>Your program should output the following message: <code class="java">X records were inserted</code> or <code class="java">1 record was inserted</code>, where <code class="java">X</code> is a number of inserted records and the output file name.<br>
+	For example: <code class="java">4 records were inserted into %file_name%.s3db</code>.</li>
+	<li>Display all the previous outputs for the conversions you have made.</li>
+</ol>
+
+<p>In case of unexpected errors, the test scripts may not be able to remove <code class="java">.s3db</code> files from previous tests. To avoid exceptions we suggest delete previous files before creating new ones.</p>
+
+<p>If you have corrupted test files, please <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://stepik.org/media/attachments/lesson/461165/stage3_files.zip" rel="noopener noreferrer nofollow">download them</a> and unzip in your working directory.</p>
+
+<h5 id="examples">Examples</h5>
+
+<p>You can use the %...%<em>[CHECKED].csv </em>test file from the previous stage.</p>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_one_xlsx.xlsx
+1 line was added to data_one_xlsx.csv
+4 cells were corrected in data_one_xlsx[CHECKED].csv
+1 record was inserted into data_one_xlsx.s3db</code></pre>
+
+<p><strong>Example 2</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_csv.csv
+12 cells were corrected in data_big_csv[CHECKED].csv
+10 records were inserted into data_big_csv.s3db</code></pre>
+
+<p><strong>Example 3</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_chk[CHECKED].csv
+10 records were inserted into data_big_chk.s3db</code></pre>

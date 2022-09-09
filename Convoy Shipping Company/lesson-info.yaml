@@ -1,0 +1,9 @@
+type: framework
+content:
+- Give Me an XLSX
+- Time to Clean Up CSV
+- Finally to S3DB
+- One Part to JSON
+- '...Another to XML'
+- It's Scoring Time
+current_task: 5

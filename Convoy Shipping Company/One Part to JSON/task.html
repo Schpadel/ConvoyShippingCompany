@@ -1,0 +1,73 @@
+<h5 id="description">Description</h5>
+
+<p>Your database is ready. As you may have expected, you still don't have the final Excel version. Your boss told you that you will have to export part of the database to two different systems. You don't know which data goes where, but rumor has it you will need a scoring function for this. For now, your algorithm should export all the database entries. The first system needs the data in the JSON format.</p>
+
+<h5 id="objectives">Objectives</h5>
+
+<ol>
+	<li>Prompt the user to give a name for the input file (complete with the .x<em>lsx,</em> <em>.csv, </em><em>[CHECKED].csv or .s3db </em>extension). For the prompt message, use <code class="language-json">Input file name</code> followed by a newline.</li>
+	<li>If your file is <em>.xlsx </em>or <em>.csv</em>,<em> </em>or it ends with the %...%<em>[CHECKED].csv</em>, perform all previous transformations in the correct order until you get an SQLite3 file.</li>
+	<li>Once you have an SQLite3 file, generate a JSON file with the same name; use the <em>.json </em>extension.</li>
+	<li>The JSON object should have the following structure ( the indenting is for illustration purposes only and doesn’t need to appear in the output file):
+	<pre><code class="language-json">{
+    "convoy": [
+        {
+            "vehicle_id": 2,
+            "engine_capacity": 200,
+            "fuel_consumption": 25,
+            "maximum_load": 70
+        },
+        {
+            "vehicle_id": 1024,
+            "engine_capacity": 500,
+            "fuel_consumption": 80,
+            "maximum_load": 150
+        }
+    ]
+}</code></pre>
+	</li>
+	<li>Save the data to a file as a JSON object .</li>
+	<li>Count the number of entries exported to the JSON file.</li>
+	<li>Your program should output the following message: <code class="language-json">X vehicles were saved</code> or <code class="language-json">1 vehicle was saved</code>, where <code class="language-json">X</code> is a number of inserted entries. It should also include the output file name.<br>
+	For example: <code class="language-json">10 vehicles were saved into %file_name%.json</code>.</li>
+	<li>Display all the previous outputs for the conversions you have made.</li>
+</ol>
+
+<p>If you have corrupted test files, please <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://stepik.org/media/attachments/lesson/461165/stage4_files.zip" rel="noopener noreferrer nofollow">download them</a> and unzip in your working directory.</p>
+
+<h5 id="examples">Examples</h5>
+
+<p>You can use the <em>.s3db </em>test file from the previous stage as a sample.</p>
+
+<p>The greater-than symbol followed by a space (<code class="language-json">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_one_xlsx.xlsx
+1 line was added to data_one_xlsx.csv
+4 cells were corrected in data_one_xlsx[CHECKED].csv
+1 record was inserted into data_one_xlsx.s3db
+1 vehicle was saved into data_one_xlsx.json</code></pre>
+
+<p><strong>Example 2</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_csv.csv
+12 cells were corrected in data_big_csv[CHECKED].csv
+10 records were inserted into data_big_csv.s3db
+10 vehicles were saved into data_big_csv.json</code></pre>
+
+<p><strong>Example 3</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_big_chk[CHECKED].csv
+10 records were inserted into data_big_chk.s3db
+10 vehicles were saved into data_big_chk.json</code></pre>
+
+<p><strong>Example 4</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; data_one_sql.s3db
+1 vehicle was saved into data_one_sql.json
+</code></pre>

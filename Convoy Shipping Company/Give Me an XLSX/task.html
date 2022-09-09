@@ -1,0 +1,102 @@
+<h5 id="theory">Theory</h5>
+
+<p>In this stage, you will be dealing with an XLSX file. The Pandas library can help you convert your XLSX file to a CSV file. Use <code class="java">read_excel</code> and <code class="java">to_csv</code>. First, import the <code class="java">Pandas</code> library:</p>
+
+<pre><code class="java">import pandas as pd</code></pre>
+
+<p>Then, read your XLSX file into a Pandas DataFrame object:</p>
+
+<pre><code class="java">my_df = pd.read_excel(r'File name.xlsx', sheet_name='SheetName', dtype=str)</code></pre>
+
+<p>The keyword argument <code class="java">sheet_name</code> of the <code class="java">read_excel</code> method can help you import a specific sheet from your XLSX file:</p>
+
+<pre><code class="java">sheet_name='SheetName'</code></pre>
+
+<p>Another keyword argument of the <code class="java">read_excel</code> method is <code class="java">dtype</code>. Thanks to it, the data from the table will be treated as a string and you will not encounter errors with converting Excel cells to other formats:</p>
+
+<pre><code class="java">dtype=str</code></pre>
+
+<p>If everything is okay, it will produce a Pandas DataFrame object filled with data. After that, you can export it to a CSV file. You can use <code class="java">to_csv</code>, another DataFrame function, for that:</p>
+
+<pre><code class="java">my_df.to_csv(r'File name.csv')</code></pre>
+
+<p>There are two important attributes for this function: </p>
+
+<pre><code class="java">index=None, header=False</code></pre>
+
+<p>The first attribute disables numeric entry indexes in a CSV file. The second attribute prevents the function from creating additional entries at the beginning of a CSV file (in the header part).</p>
+
+<p>If you need more information, <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://datatofish.com/import-csv-sql-server-python/" rel="noopener noreferrer nofollow">Import a CSV File</a> and <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://datatofish.com/excel-to-csv-python/" rel="noopener noreferrer nofollow">Convert Excel to CSV</a> tutorials will help you!</p>
+
+<h5 id="description">Description </h5>
+
+<p>"Convoy" experiences financial problems. You suggested making a single database that contains every company's vehicle to plan the logistics, and your management agreed. You will take a closer look at different parameters: the engine capacity, the maximum load, the fuel consumption. The data has already been collected, all you need is to output it to a CSV file.</p>
+
+<h5 id="objectives">Objectives</h5>
+
+<ol>
+	<li>Prompt the user to give a name for the input Excel file (complete with the .xlsx extension). For the prompt message, use <code class="java">Input file name</code> followed by a newline.</li>
+	<li>Import a sheet named <code class="java">Vehicles</code> from the entered XLSX file to a CSV file.</li>
+	<li>The CSV file should have the same name as the XLSX file but it should have the <em>.csv</em> extension (you can take the test table below).</li>
+	<li>Your program should import only the headers, omitting indexes.</li>
+	<li>Count the number of entries imported to the CSV file and print them out to standard output; the headers should not be counted.</li>
+	<li>Your program should output the following message: <code class="java">X lines were imported to %<em>file_name%</em>.csv</code> or <code class="java">1 line was imported to %<em>file_name%</em>.csv</code><em> , </em>where <code class="java">X</code> is the number of imported lines.<br>
+	For example: <code class="java">4 lines were imported to convoy.csv</code></li>
+</ol>
+
+<p>Below is an example of an XLSX table you can use. Remember that the sheet should be named <code class="java">Vehicles</code>.</p>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 550px;">
+	<tbody>
+		<tr>
+			<td>vehicle_id</td>
+			<td>engine_capacity</td>
+			<td>fuel_consumption</td>
+			<td>maximum_load</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>200</td>
+			<td>fuel cons. 25</td>
+			<td>tons 14</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>220l</td>
+			<td>55</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>n.8</td>
+			<td>280</td>
+			<td>liter per km 69</td>
+			<td>16 ton</td>
+		</tr>
+		<tr>
+			<td>16</td>
+			<td>100</td>
+			<td>34l</td>
+			<td>24</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>You can download a sample file <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://stepik.org/media/attachments/lesson/461165/convoy.xlsx" rel="noopener noreferrer nofollow">here</a>.</p>
+
+<p>If you have corrupted test files, please <a target="_blank" target="_blank" target="_blank" target="_blank" target="_blank" href="https://stepik.org/media/attachments/lesson/461165/stage1_files.zip" rel="noopener noreferrer nofollow">download them</a> and unzip in your working directory.</p>
+
+<h5 id="examples">Examples</h5>
+
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+
+<p><strong>Example 1</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; convoy.xlsx
+4 lines were adedd to convoy.csv</code></pre>
+
+<p><strong>Example 2</strong></p>
+
+<pre><code class="language-no-highlight">Input file name
+&gt; convoy.xlsx
+1 line was added to convoy.csv</code></pre>
